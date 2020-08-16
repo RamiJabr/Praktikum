@@ -19,6 +19,8 @@ um änderungen des Models auf die Datenbank zu übertragen.
 
 RESTfull API aufsetzen durch get put delete post
 
+Überprüfen durch Postman Requests
+Beachte bei Put verwendung von x-www-form-urlencoded
 
 Add Policies for Authorisation
 - artisan make:policy JobPolicy –model:Job
