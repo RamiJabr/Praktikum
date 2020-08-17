@@ -19,6 +19,7 @@ class CreateCompaniesTable extends Migration
             $table->integer('employee_count');
             $table->timestamps();
             $table->integer('job_id')->unsigned();
+
             $table->foreign('job_id')
                 ->references('job_id')->on('jobs')
                 ->onDelete('cascade');

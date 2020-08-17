@@ -10,8 +10,8 @@ use Illuminate\Database\Eloquent\Model;
 class User extends Authenticatable
 {
     use Notifiable;
-    protected $table = 'album';
-    protected $primaryKey = 'album_id';
+    protected $table = 'users';
+    protected $primaryKey = 'user_id';
 
     /**
      * The attributes that are mass assignable.
