@@ -20,21 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5a973a92-1444-40b2-817e-08bd86432929" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/Praktikum.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/laravel-plugin.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/phpunit.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Company.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/CompanyController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/JobController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Job.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_08_16_014553_create_jobs_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_08_16_014723_create_companies_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_08_16_014723_create_user_company.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Company.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Company.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Job.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Job.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_08_16_014723_create_companies_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_08_16_014723_create_companies_table.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -184,7 +175,7 @@
       <option name="presentableId" value="Default" />
       <updated>1597517032251</updated>
       <workItem from="1597517033403" duration="6766000" />
-      <workItem from="1597546781451" duration="6320000" />
+      <workItem from="1597546781451" duration="10862000" />
     </task>
     <servers />
   </component>
@@ -267,9 +258,10 @@
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state width="2517" height="507" key="GridCell.Tab.1.right/4480.5.1920.1080/-1920.5.1920.1080/2560.-14.1920.1080/0.0.2560.1440@0.0.2560.1440" timestamp="1597550336972" />
-    <state x="1114" y="643" key="NewPhpFileDialog" timestamp="1597551276382">
+    <state x="1114" y="643" key="NewPhpFileDialog" timestamp="1597625313510">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
+    <state x="1114" y="643" key="NewPhpFileDialog/0.0.2560.1440/4480.5.1920.1080/-1920.5.1920.1080/2560.-14.1920.1080@0.0.2560.1440" timestamp="1597625313510" />
     <state x="1114" y="643" key="NewPhpFileDialog/4480.5.1920.1080/-1920.5.1920.1080/2560.-14.1920.1080/0.0.2560.1440@0.0.2560.1440" timestamp="1597551276382" />
     <state x="116" y="-19" width="2539" height="1314" maximized="true" key="dock-window-1" timestamp="1597547133703">
       <screen x="0" y="0" width="2560" height="1440" />

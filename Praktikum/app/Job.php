@@ -14,6 +14,9 @@ class Job extends Model
         'jobname','employed'
     ];
 
-
+    public function companies()
+    {
+        return $this->belongsTo(Company::class);
+    }
 
 }
