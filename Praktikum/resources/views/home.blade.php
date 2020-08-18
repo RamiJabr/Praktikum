@@ -2,6 +2,6 @@
 
 @section('content')
     <div class="container">
-        error
+        Welcome to the UI only Jobs work atm with fully CRUD functionality!
     </div>
 @endsection

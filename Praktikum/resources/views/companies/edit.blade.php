@@ -14,15 +14,15 @@
                 </div>
                 <br />
             @endif
-            <form method="post" action="{{ route('jobs.update', $job->job_id) }}">
+            <form method="post" action="{{ route('companies.update', $company->company_id) }}">
                 @method('PATCH')
                 @csrf
-                <div class="form-group"> <label for="jobname">Jobname:</label>
-                    <input type="text" class="form-control" name="jobname" value={{ $job->jobname }} />
+                <div class="form-group"> <label for="companyname ">Jobname:</label>
+                    <input type="text" class="form-control" name="companyname" value={{ $company->company_name }} />
                 </div>
                 <div class="form-group">
-                    <label for="employed">employed:</label>
-                    <input type="text" class="form-control" name="employed" value={{ $job->employed }} />
+                    <label for="employed">employee_count:</label>
+                    <input type="text" class="form-control" name="employee_count" value={{ $companies->employee_count }} />
                     <button type="submit" class="btn btn-primary">Update</button>
                 </div>
             </form>

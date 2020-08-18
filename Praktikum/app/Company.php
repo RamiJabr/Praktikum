@@ -9,7 +9,7 @@ class Company extends Model
     protected $table = 'companies';
 
     protected $fillable=[
-        'company_name','employee_count'
+        'company_name','employee_count','creator'
     ];
 
     public function jobs()

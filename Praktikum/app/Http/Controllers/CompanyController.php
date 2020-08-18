@@ -14,7 +14,9 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        return Company::all();
+        $companys = Company::all();
+        return view('companies.index', compact('companys'));
+
     }
 
     /**
@@ -24,19 +26,7 @@ class CompanyController extends Controller
      */
     public function create(Request $request)
     {
-        $request->validate([
-            'company_name'=>'required',
-            'employee_count'=>'required'
-        ]);
-
-        $company = new Company;
-        $company->company_name = $request->company_name;
-        $company->employee_count = $request->employee_count;
-        $company->save();
-
-        return response()->json([
-            "message" => "company added"
-        ], 201);
+        return view('companies.create');
     }
 
     /**
@@ -47,7 +37,18 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        return Company::all();
+        $request->validate([
+            'company_name'=>'required|max:255',
+            'employee_count'=>'required|max:255'
+        ]);
+
+        $company = new Company;
+        $company->company_name = $request->company_name;
+        $company->employee_count = $request->employee_count;
+        $company->creator = $request->user()->user_id;
+        $company->save();
+        return redirect('/companies/')->with('success', 'Company saved!');
+        //return response()->json($companies, 201);
     }
 
     /**
@@ -56,9 +57,9 @@ class CompanyController extends Controller
      * @param  \App\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($company_id)
     {
-        return Company::find($id);
+        return Company::find($company_id);
     }
 
     /**
@@ -67,9 +68,10 @@ class CompanyController extends Controller
      * @param  \App\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function edit(Company $company)
+    public function edit($company_id)
     {
-        //
+        $company = Company::find($company_id);
+        return view('companies.edit',compact('company'));
     }
 
     /**
@@ -79,12 +81,14 @@ class CompanyController extends Controller
      * @param  \App\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $company_id)
     {
-        $company = Company::findOrFail($id);
+
+
+        $company = Company::findOrFail($company_id);
         $company->update($request->all());
 
-        return $request;
+        return redirect('/companies/')->with('success', 'Company updated!');
     }
 
     /**
@@ -98,6 +102,6 @@ class CompanyController extends Controller
         $company = Company::findOrFail($id);
         $company->delete();
 
-        return 204;
+        return response()->json(null, 204);
     }
 }

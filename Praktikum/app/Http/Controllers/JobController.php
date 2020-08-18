@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Job;
+use http\Client\Curl\User;
 use Illuminate\Http\Request;
 
 class JobController extends Controller
@@ -37,14 +38,17 @@ class JobController extends Controller
      */
     public function store(Request $request)
     {
+
+        $this->authorize('create', auth()->user());
         $request->validate([
-            'jobname'=>'required',
-            'employed'=>'required'
+            'jobname'=>'required|max:255',
+            'employed'=>'required|max:255'
         ]);
 
         $job = new Job;
         $job->jobname = $request->jobname;
         $job->employed = $request->employed;
+        $job->user_id = $request->user()->user_id;
         $job->save();
         return redirect('/jobs/')->with('success', 'Job saved!');
         //return response()->json($job, 201);
@@ -69,6 +73,7 @@ class JobController extends Controller
      */
     public function edit($job_id)
     {
+        $this->authorize('update', auth()->user());
         $job = Job::find($job_id);
         return view('jobs.edit',compact('job'));
     }
@@ -83,7 +88,7 @@ class JobController extends Controller
     public function update(Request $request, $job_id)
     {
 
-
+        $this->authorize('update', auth()->user());
         $job = Job::findOrFail($job_id);
         $job->update($request->all());
 
@@ -98,6 +103,7 @@ class JobController extends Controller
      */
     public function destroy(Request $request,$id)
     {
+        $this->authorize('delete', auth()->user());
         $job = Job::findOrFail($id);
         $job->delete();
 

@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col-sm-8 offset-sm-2">
-            <h1 class="display-3">Add a Job</h1>
+            <h1 class="display-3">Add a Company</h1>
             <div>
                 @if ($errors->any())
                     <div class="alert alert-danger">
@@ -14,17 +14,17 @@
                         </ul>
                     </div><br />
                 @endif
-                <form method="post" action="{{ route('jobs.store') }}">
+                <form method="post" action="{{ route('companies.store') }}">
                     @csrf
                     <div class="form-group">
-                        <label for="jobname">Jobname:</label>
-                        <input type="text" class="form-control" name="jobname"/>
-                    </div>          <div class="form-group">
-                        <label for="employed">Employed:</label>
-                        <input type="text" class="form-control" name="employed"/>
+                        <label for="company_name">Firmenname:</label>
+                        <input type="text" class="form-control" name="company_name"/>
                     </div>
-
-                    <button type="submit" class="btn btn-primary-outline">Add Job</button>
+                    <div class="form-group">
+                        <label for="employee_count">Mitarbeiteranzahl:</label>
+                        <input type="text" class="form-control" name="employee_count"/>
+                    </div>
+                    <button type="submit" class="btn btn-primary-outline">Add Company</button>
                 </form>
             </div>
         </div>

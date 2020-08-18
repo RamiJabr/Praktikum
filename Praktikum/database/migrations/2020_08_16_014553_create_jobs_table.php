@@ -14,10 +14,14 @@ class CreateJobsTable extends Migration
     public function up()
     {
         Schema::create('jobs', function (Blueprint $table) {
+            $table->engine = 'myISAM';
+
             $table->increments('job_id');
             $table->string('jobname',255);
             $table->string('employed');
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
+            $table->foreign('user_id')->references('user_id')->on('users');
         });
     }
 

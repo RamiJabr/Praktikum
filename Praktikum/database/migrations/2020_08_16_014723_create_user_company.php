@@ -14,7 +14,8 @@ class CreateUserCompany extends Migration
     public function up()
     {
         Schema::create('user_company', function (Blueprint $table) {
-            $table->engine = 'MyISAM';
+            $table->engine = 'myISAM';
+
             $table->increments('id');
             $table->integer('company_id')->unsigned();
             $table->integer('user_id')->unsigned();

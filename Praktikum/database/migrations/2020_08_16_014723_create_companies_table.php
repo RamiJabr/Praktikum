@@ -14,15 +14,16 @@ class CreateCompaniesTable extends Migration
     public function up()
     {
         Schema::create('companies', function (Blueprint $table) {
+            $table->engine = 'myISAM';
+
             $table->increments('company_id');
             $table->string('company_name',255);
+            $table->integer('job_id')->unsigned()->default(0);
+            $table->integer('creator')->unsigned();
             $table->integer('employee_count');
             $table->timestamps();
-            $table->integer('job_id')->unsigned();
-
-            $table->foreign('job_id')
-                ->references('job_id')->on('jobs')
-                ->onDelete('cascade');
+            //Set Keys
+            $table->foreign('job_id')->references('job_id')->on('jobs');
         });
     }
 

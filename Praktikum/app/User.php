@@ -28,7 +28,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token','jobs_id'
     ];
 
     /**
@@ -45,5 +45,9 @@ class User extends Authenticatable
         return $this->belongsToMany(Company::class,'user_company');
     }
 
+    public function jobs()
+    {
+        return $this->hasMany(Job::class,'jobs_id');
+    }
 
 }
