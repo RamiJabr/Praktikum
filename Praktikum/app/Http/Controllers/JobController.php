@@ -14,7 +14,9 @@ class JobController extends Controller
      */
     public function index()
     {
-        return Job::all();
+        $jobs = Job::all();
+        return view('jobs.index', compact('jobs'));
+
     }
 
     /**
@@ -24,12 +26,7 @@ class JobController extends Controller
      */
     public function create(Request $request)
     {
-        $job = new Job;
-        $job->jobname = $request->jobname;
-        $job->employed = $request->employed;
-        $job->save();
-
-        return response()->json($job, 201);
+        return view('jobs.create');
     }
 
     /**
@@ -40,7 +37,17 @@ class JobController extends Controller
      */
     public function store(Request $request)
     {
-        return Job::all();
+        $request->validate([
+            'jobname'=>'required',
+            'employed'=>'required'
+        ]);
+
+        $job = new Job;
+        $job->jobname = $request->jobname;
+        $job->employed = $request->employed;
+        $job->save();
+        return redirect('/jobs/')->with('success', 'Job saved!');
+        //return response()->json($job, 201);
     }
 
     /**
@@ -60,9 +67,10 @@ class JobController extends Controller
      * @param  \App\Job  $job
      * @return \Illuminate\Http\Response
      */
-    public function edit(Job $job)
+    public function edit($job_id)
     {
-        //
+        $job = Job::find($job_id);
+        return view('jobs.edit',compact('job'));
     }
 
     /**
@@ -72,12 +80,14 @@ class JobController extends Controller
      * @param  \App\Job  $job
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $job_id)
     {
-        $job = Job::findOrFail($id);
+
+
+        $job = Job::findOrFail($job_id);
         $job->update($request->all());
 
-        return response()->json($request, 200);
+        return redirect('/jobs/')->with('success', 'Job updated!');
     }
 
     /**

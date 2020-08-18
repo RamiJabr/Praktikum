@@ -24,6 +24,11 @@ class CompanyController extends Controller
      */
     public function create(Request $request)
     {
+        $request->validate([
+            'company_name'=>'required',
+            'employee_count'=>'required'
+        ]);
+
         $company = new Company;
         $company->company_name = $request->company_name;
         $company->employee_count = $request->employee_count;

@@ -21,15 +21,30 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white ">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                @guest
+                @else
+                <a class="navbar-brand d-flex" href="{{ url('/home') }}">
+                    <div><img src="/svg/briefcase.svg"></div>
+                    <div class="pl-2 pt-1">Home</div>
+                </a>
+                <a class="navbar-brand d-flex" href="{{ url('/jobs') }}">
+                    <div><img src="/svg/job.svg"  style="height: 20px;"></div>
+                    <div class="pl-2 pt-1">Jobs</div>
+                </a>
+                <a class="navbar-brand d-flex" href="{{ url('/companies') }}">
+                    <div><img src="/svg/company.svg" style="height: 20px;"></div>
+                    <div class="pl-2 pt-1">Company</div>
+                </a>
+                <a class="navbar-brand d-flex" href="{{ url('/users') }}">
+                    <div><img src="/svg/company.svg" style="height: 20px;"></div>
+                    <div class="pl-2 pt-1">User</div>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
+                @endguest
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
