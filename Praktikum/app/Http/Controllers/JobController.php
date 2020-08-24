@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class JobController extends Controller
 {
+
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +24,6 @@ class JobController extends Controller
     {
         $jobs = Job::all();
         return view('jobs.index', compact('jobs'));
-
     }
 
     /**
@@ -39,7 +45,7 @@ class JobController extends Controller
     public function store(Request $request)
     {
 
-        $this->authorize('create', auth()->user());
+        $this->authorize('create', Job::Class);
         $request->validate([
             'jobname'=>'required|max:255',
             'employed'=>'required|max:255'
@@ -51,7 +57,6 @@ class JobController extends Controller
         $job->user_id = $request->user()->user_id;
         $job->save();
         return redirect('/jobs/')->with('success', 'Job saved!');
-        //return response()->json($job, 201);
     }
 
     /**
@@ -73,7 +78,7 @@ class JobController extends Controller
      */
     public function edit($job_id)
     {
-        $this->authorize('update', auth()->user());
+        $this->authorize('update',$job = Job::find($job_id));
         $job = Job::find($job_id);
         return view('jobs.edit',compact('job'));
     }
@@ -88,7 +93,7 @@ class JobController extends Controller
     public function update(Request $request, $job_id)
     {
 
-        $this->authorize('update', auth()->user());
+        $this->authorize('update',$job = Job::findOrFail($job_id));
         $job = Job::findOrFail($job_id);
         $job->update($request->all());
 
@@ -101,10 +106,10 @@ class JobController extends Controller
      * @param  \App\Job  $job
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request,$id)
+    public function destroy(Request $request,$job_id)
     {
-        $this->authorize('delete', auth()->user());
-        $job = Job::findOrFail($id);
+        $this->authorize('delete', $job = Job::findOrFail($job_id));
+        $job = Job::findOrFail($job_id);
         $job->delete();
 
         return response()->json(null, 204);

@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\User;
 use App\Job;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Auth;
 
 class JobPolicy
 {
@@ -18,7 +19,7 @@ class JobPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -30,7 +31,7 @@ class JobPolicy
      */
     public function view(User $user, Job $job)
     {
-        //user is allowed to view
+        return true;
     }
 
     /**
@@ -41,8 +42,7 @@ class JobPolicy
      */
     public function create(User $user)
     {
-        return auth()->user() != null;
-        //user is allowed to create
+        return Auth::Check();
     }
 
     /**
@@ -54,7 +54,7 @@ class JobPolicy
      */
     public function update(User $user, Job $job)
     {
-        return $user->id == $job->user_id;
+        return $user->user_id == $job->user_id;
     }
 
     /**
@@ -66,7 +66,7 @@ class JobPolicy
      */
     public function delete(User $user, Job $job)
     {
-        return $user->id == $job->user_id;
+        return $user->user_id == $job->user_id;
     }
 
 

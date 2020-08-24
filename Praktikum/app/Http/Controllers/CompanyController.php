@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class CompanyController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +21,6 @@ class CompanyController extends Controller
     {
         $companys = Company::all();
         return view('companies.index', compact('companys'));
-
     }
 
     /**
@@ -37,9 +41,10 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Company::Class);
         $request->validate([
             'company_name'=>'required|max:255',
-            'employee_count'=>'required|max:255'
+            'employee_count'=>'required|numeric|min:0|max:500000'
         ]);
 
         $company = new Company;
@@ -70,6 +75,7 @@ class CompanyController extends Controller
      */
     public function edit($company_id)
     {
+        $this->authorize('update',$company = Job::find($company_id));
         $company = Company::find($company_id);
         return view('companies.edit',compact('company'));
     }
@@ -84,10 +90,9 @@ class CompanyController extends Controller
     public function update(Request $request, $company_id)
     {
 
-
+        $this->authorize('update',$company = Job::findOrFail($company_id));
         $company = Company::findOrFail($company_id);
         $company->update($request->all());
-
         return redirect('/companies/')->with('success', 'Company updated!');
     }
 
@@ -97,11 +102,11 @@ class CompanyController extends Controller
      * @param  \App\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request,$id)
+    public function destroy(Request $request,$company_id)
     {
-        $company = Company::findOrFail($id);
+        $this->authorize('delete', $company = Job::findOrFail($company_id));
+        $company = Company::findOrFail($company_id);
         $company->delete();
-
         return response()->json(null, 204);
     }
 }
