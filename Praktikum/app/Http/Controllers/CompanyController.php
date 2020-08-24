@@ -44,7 +44,7 @@ class CompanyController extends Controller
         $this->authorize('create', Company::Class);
         $request->validate([
             'company_name'=>'required|max:255',
-            'employee_count'=>'required|max:255'
+            'employee_count'=>'required|numeric|min:0|max:500000'
         ]);
 
         $company = new Company;

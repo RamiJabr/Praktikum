@@ -55,7 +55,7 @@ class CompanyPolicy
      */
     public function update(User $user, Company $company)
     {
-        return $user->user_id == $company->user_id;
+        return $user->user_id == $company->creator;
     }
 
     /**
@@ -67,7 +67,7 @@ class CompanyPolicy
      */
     public function delete(User $user, Company $company)
     {
-        return $user->user_id == $company->user_id;
+        return $user->user_id == $company->creator;
     }
 
 

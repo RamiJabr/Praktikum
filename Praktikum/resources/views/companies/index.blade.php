@@ -19,9 +19,14 @@
                     <tr>
                         <td>{{$company->company_name}}</td>
                         <td>{{$company->employee_count}}</td>
+                        @can('update',$company)
                         <td>
-                            <a href="{{ route('companies.edit',$company->company_id)}}" class="btn btn-primary">Edit</a>
+
+                                <a href="{{ route('companies.edit',$company->company_id)}}" class="btn btn-primary">Edit</a>
+
                         </td>
+                        @endcan
+
                         <td>
                             <form action="{{ route('companies.destroy', $company->company_id)}}" method="post">
                                 @csrf
@@ -29,6 +34,7 @@
                                 <button class="btn btn-danger" type="submit">Delete</button>
                             </form>
                         </td>
+
                     </tr>
                 @endforeach
                 </tbody>
