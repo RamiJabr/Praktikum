@@ -10,6 +10,8 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
+                    <td>company_id </td>
+                    <td>Logo</td>
                     <td>jobname</td>
                     <td>employed</td>
                 </tr>
@@ -17,6 +19,8 @@
                 <tbody>
                 @foreach($companys as $company)
                     <tr>
+                        <td>{{$company->company_id}}</td>
+                        <td><img src="/storage/{{ $company->company_logo }}" class="rounded-circle w-40"></td>
                         <td>{{$company->company_name}}</td>
                         <td>{{$company->employee_count}}</td>
                         @can('update',$company)
@@ -25,7 +29,7 @@
                                 <a href="{{ route('companies.edit',$company->company_id)}}" class="btn btn-primary">Edit</a>
 
                         </td>
-                        @endcan
+
 
                         <td>
                             <form action="{{ route('companies.destroy', $company->company_id)}}" method="post">
@@ -34,7 +38,7 @@
                                 <button class="btn btn-danger" type="submit">Delete</button>
                             </form>
                         </td>
-
+                        @endcan
                     </tr>
                 @endforeach
                 </tbody>

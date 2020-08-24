@@ -10,6 +10,7 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
+                    <td>job_id</td>
                     <td>jobname</td>
                     <td>employed</td>
                 </tr>
@@ -17,8 +18,10 @@
                 <tbody>
                 @foreach($jobs as $job)
                     <tr>
+                        <td>{{$job->job_id}}</td>
                         <td>{{$job->jobname}}</td>
                         <td>{{$job->employed}}</td>
+                        @can('update',$job)
                         <td>
                             <a href="{{ route('jobs.edit',$job->job_id)}}" class="btn btn-primary">Edit</a>
                         </td>
@@ -29,6 +32,7 @@
                                 <button class="btn btn-danger" type="submit">Delete</button>
                             </form>
                         </td>
+                        @endcan
                     </tr>
                 @endforeach
                 </tbody>
