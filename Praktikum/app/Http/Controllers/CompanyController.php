@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Company;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Image;
+
 
 class CompanyController extends Controller
 {
@@ -44,13 +47,21 @@ class CompanyController extends Controller
         $this->authorize('create', Company::Class);
         $request->validate([
             'company_name'=>'required|max:255',
-            'employee_count'=>'required|numeric|min:0|max:500000'
+            'employee_count'=>'required|numeric|min:0|max:500000',
+            'image' => 'image'
         ]);
+
+        $imagePath = request('image')->store('uploads', 'public');
+
+        $image = Image::make(public_path("storage/{$imagePath}"))->resize(40, 40);
+        $image->save();
+
 
         $company = new Company;
         $company->company_name = $request->company_name;
         $company->employee_count = $request->employee_count;
         $company->creator = $request->user()->user_id;
+        $company->company_logo = $imagePath;
         $company->save();
         return redirect('/companies/')->with('success', 'Company saved!');
         //return response()->json($companies, 201);
@@ -90,7 +101,7 @@ class CompanyController extends Controller
     public function update(Request $request, $company_id)
     {
 
-        $this->authorize('update',$company = Job::findOrFail($company_id));
+        $this->authorize('update',$company = Company::findOrFail($company_id));
         $company = Company::findOrFail($company_id);
         $company->update($request->all());
         return redirect('/companies/')->with('success', 'Company updated!');
@@ -104,9 +115,9 @@ class CompanyController extends Controller
      */
     public function destroy(Request $request,$company_id)
     {
-        $this->authorize('delete', $company = Job::findOrFail($company_id));
+        $this->authorize('delete', $company = Company::findOrFail($company_id));
         $company = Company::findOrFail($company_id);
         $company->delete();
-        return response()->json(null, 204);
+        return redirect('/companies/')->with('success', 'Company deleted!');
     }
 }

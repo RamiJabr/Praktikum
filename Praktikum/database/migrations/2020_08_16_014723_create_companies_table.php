@@ -21,6 +21,7 @@ class CreateCompaniesTable extends Migration
             $table->integer('job_id')->unsigned()->default(0);
             $table->integer('creator')->unsigned();
             $table->integer('employee_count');
+            $table->string('company_logo');
             $table->timestamps();
             //Set Keys
             $table->foreign('job_id')->references('job_id')->on('jobs');

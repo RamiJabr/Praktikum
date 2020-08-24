@@ -112,6 +112,6 @@ class JobController extends Controller
         $job = Job::findOrFail($job_id);
         $job->delete();
 
-        return response()->json(null, 204);
+        return redirect('/jobs/')->with('success', 'Job deleted!');
     }
 }
